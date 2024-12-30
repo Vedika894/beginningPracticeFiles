@@ -9,61 +9,59 @@
 import java.sql.SQLOutput;
 
 public class Reservation {
-    //instance fields
     int guestCount;
     int restaurantCapacity;
     boolean isRestaurantOpen;
     boolean isConfirmed;
+    String restaurantName;
 
-    //it's a constructor to initialize the reservation objects which
-    //are the restaurants created in the main method
-    public Reservation(int count, int capacity, boolean open){
-        if (count < 1 || count > 8 ) {
-            System.out.println("Invalid reservation");
-        }
-        guestCount = count;
-        restaurantCapacity = capacity;
-        isRestaurantOpen = open;
+
+// the constructor has no return value, not even void
+    public Reservation( int count, int capacity, boolean open, String name){
+      if(count<1 || count>8){
+          System.out.println("valid reservation for " +name);
+      }
+      else{
+          System.out.println("invalid reservation \n");
+      }
+      guestCount = count;
+      restaurantCapacity = capacity;
+      isRestaurantOpen = open;
+      restaurantName = name;
     }
- //I think ww have formal parameters because we need to initialize them, or change their value
     public void confirmReservation(){
-        if (restaurantCapacity>=guestCount && isRestaurantOpen){
-            System.out.println("Reservation confirmed");
+        if(isRestaurantOpen&& guestCount <= restaurantCapacity){
+            System.out.println(" reservation confirmed for" +  restaurantName);
             isConfirmed = true;
         }
         else{
-            System.out.println("Reservation not confirmed");
+            System.out.println("Reservation denied" + restaurantName);
             isConfirmed = false;
         }
     }
-   //functions are non-static, so they need to be called from an object
+
     public void informUser() {
-        if (!isConfirmed) {
-            System.out.println("Unable, to confirm reservation");
-        }
-        else{
-            System.out.println("enjoy your meal ");
+        if (isConfirmed) {
+            System.out.println("enjoy your meal!" +  restaurantName);
+        } else {
+            System.out.println("unable to confirm" + restaurantName);
         }
     }
-
-
     public static void main(String[] args) {
-        //creating the restaurants
+      Reservation res1 = new Reservation(5,10, true,"NUMBER1" );
+      res1.confirmReservation();
+      res1.informUser();
 
-        Reservation res1 = new Reservation(7, 10, true);
-        res1.confirmReservation();
-        res1.informUser();
+      Reservation res2 = new Reservation(9, 10, true, "NUMBER2");
+      res2.confirmReservation();
+      res2.informUser();
 
-        Reservation res2 = new Reservation(9, 10, true);
-            res2.informUser();
-            res2.confirmReservation();
-        Reservation res3 = new Reservation (8, 7, true);
-             res3.confirmReservation();
-             res3.informUser();
-             Reservation res4 = new Reservation(6,8, false);
-             res4.informUser();
-             res4.confirmReservation();
-
+      Reservation res3 = new Reservation (7, 11, false, "NUMBER3");
+          res3.confirmReservation();
+          res3.informUser();
+      Reservation res4 = new Reservation(6, 5, true, "NUMBER4");
+      res4.confirmReservation();
+      res4.informUser();
 
     }
 
