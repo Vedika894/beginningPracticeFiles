@@ -22,5 +22,6 @@ public class Main {
                 int d = (int)(Math.random() * 11 ) + 10;
                 System.out.println(d);
             }
-
+             //the formula : to find the correct range :
+             //(Math.random() * (maxValue - minValue + 1)) + minValue
 }
