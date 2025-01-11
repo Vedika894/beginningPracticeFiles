@@ -16,42 +16,28 @@ public class Main {
         System.out.println("Enter a formula : (ex. num1 oper num2 with spaces) ");
         double thirdMethodResult = calcResult (scanner.nextLine());
 
-        System.out.println("Calling the first method" + firstNumber);
-        System.out.println("Calling the second method" + secondMethodResult);
-        System.out.println("Calling the third method : " + thirdMethodResult);
-
-
+        System.out.printf("%-26s :  %2f%n", " Calling the first method", firstNumber);
+        System.out.printf("%-26s : %2f%n", "Calling the second method",secondMethodResult);
+        System.out.printf("%-26s : %2f%n", "Calling the third method",thirdMethodResult);
 
     }
 
 
     public static double calcResult(double num1, double num2) {
         return num1 + num2;
-
     }
 
     public static double calcResult(double num1, double num2, char oper) {
         double answer = 0;
 
-        switch (oper) {
-            case '*':
-                answer = num1 * num2;
-                break;
-            case '/':
-                answer = num1 / num2;
-                break;
+        return switch (oper) {
+            case '+' -> num1 + num2;
+            case '-' -> num1 - num2;
+            case  '*' -> num1 * num2;
+            case '/' -> num1 / num2;
+            default -> 0;
 
-            case '+':
-                answer = num1 + num2;
-                break;
-
-            case '-':
-                answer = num1 - num2;
-            default:
-                break;
-        }
-
-     return answer;
+        };
     }
 
     public static double calcResult(String formula){
