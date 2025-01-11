@@ -1,25 +1,26 @@
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
         System.out.println("enter 2 numbers separated by space: ");
-        String Strnum1 = input.next();
-        String Strnum2 = input.next();
-
-        //transform them into Strings
-        double num1 = Double.parseDouble(Strnum1);
-        double num2 = Double.parseDouble(Strnum2);
+        double num1 = scanner.nextDouble();
+        double num2 = scanner.nextDouble();
+        double firstNumber = calcResult(num1, num2);
 
         System.out.println("please enter the operator  ( *, +, or -): ");
-        String character = input.next();
+        scanner.nextLine(); //skip the line to avoid overlap from the previous user input
+        char oper = scanner.nextLine().charAt(0);
+        double secondMethodResult = calcResult(num1, num2, oper);
 
         System.out.println("Enter a formula : (ex. num1 oper num2 with spaces) ");
-        String formula = input.nextLine();
+        double thirdMethodResult = calcResult (scanner.nextLine());
 
-        System.out.println(calcResult(num1, num2));
-        System.out.println(calcResult(num1 ,num2, character));
-        System.out.println(calcResult(formula));
+        System.out.println("Calling the first method" + firstNumber);
+        System.out.println("Calling the second method" + secondMethodResult);
+        System.out.println("Calling the third method : " + thirdMethodResult);
+
+
 
     }
 
@@ -29,50 +30,39 @@ public class Main {
 
     }
 
-    public static double calcResult(double num1, double num2, String oper) {
-        int answer = 0;
-        if (oper == "*") {
-            answer = (int) (num2 * num1);
-        }
-        if (oper == "+") {
-            answer = (int) (num1 * num2);
-        }
-        if (oper == "-")
-            answer = (int) (num1 - num2);
-        if (oper == "/") {
-            answer = (int) (num1 / num2);
-        }
-        return answer;
-    }
+    public static double calcResult(double num1, double num2, char oper) {
+        double answer = 0;
 
-    public static double calcResult(String formulaa){
-        int answer = 0;
-        char Charnum1 = formulaa.charAt(0,1);
-        char Charoper  = formulaa.charAt(3);
-        char Charnum2 = formulaa.charAt(5);
-
-        int num1 = Integer.parseInt(String.valueOf(Charnum1));
-       // int chara = Integer.parseInt(String.valueOf(Charoper));
-        int num2 = Integer.parseInt(String.valueOf(Charnum2));
-
-        switch (Charoper){
-            case 1:
-                Charoper = '*';
+        switch (oper) {
+            case '*':
                 answer = num1 * num2;
                 break;
-            case 2:
-                Charoper = '/';
+            case '/':
                 answer = num1 / num2;
+                break;
 
-            case 3:
-                Charoper = '+';
+            case '+':
                 answer = num1 + num2;
-            case 4 :
-                Charoper = '-';
+                break;
+
+            case '-':
                 answer = num1 - num2;
+            default:
+                break;
         }
 
-        return answer;
+     return answer;
+    }
+
+    public static double calcResult(String formula){
+       int firstIndexSpace = formula.indexOf(' ');
+         double num1 = Double.parseDouble(formula.substring(0, firstIndexSpace)); //first number is before the first space
+         char  oper = (formula.charAt(firstIndexSpace +1));//operator is after the firstSpace
+        double num2 = Double.parseDouble(formula.substring(firstIndexSpace +2)); //after the first space and the operator
+
+        return calcResult (num1, num2, oper);   //calling the second method and returning it too
+
+
     }
 }
 
