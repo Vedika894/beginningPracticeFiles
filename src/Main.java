@@ -4,9 +4,9 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("enter 2 numbers separated by space: ");
-        double num1 = scanner.nextDouble();
-        double num2 = scanner.nextDouble();
-        double firstNumber = calcResult(num1, num2);
+        double num1 = scanner.nextDouble();    //first number
+        double num2 = scanner.nextDouble();    //second number
+        double firstNumber = calcResult(num1, num2);   //calling the method
 
         System.out.println("please enter the operator  ( *, +, or -): ");
         scanner.nextLine(); //skip the line to avoid overlap from the previous user input
